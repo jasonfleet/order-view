@@ -49,7 +49,11 @@ class ImportController extends Controller
 
         $csvResult = Order::importRows($csv);
 
-        $result = Order::addRows($csvResult);
+        $result = null;
+
+        if (!isset($csvResult['error'])) {
+            $result = Order::addRows($csvResult);
+        }
 
         return [
             'db' => Order::getAll(Order::$dbTableName),
@@ -70,7 +74,11 @@ class ImportController extends Controller
 
         $csvResult = Organization::importRows($csv);
 
-        $result = Organization::addRows($csvResult);
+        $result = null;
+
+        if (!isset($csvResult['error'])) {
+            $result = Organization::addRows($csvResult);
+        }
 
         return [
             'db' => Organization::getAll(Organization::$dbTableName),
@@ -91,10 +99,15 @@ class ImportController extends Controller
 
         $csvResult = Product::importRows($csv);
 
-        Product::addRows($csvResult);
+        $result = null;
+
+        if (!isset($csvResult['error'])) {
+            $result = Product::addRows($csvResult);
+        }
 
         return [
             'db' => Product::getAll(Product::$dbTableName),
+            'result' => $result,
             'csv' => $csvResult,
         ];
     }

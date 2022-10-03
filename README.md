@@ -23,7 +23,7 @@ There are 2 containers -
 - PHP Version 8.1 and Apache
 - MySQL
 
-I intend to work on the DOCKER install for this project to make it work with LARAVEL and NGINX, and use it for _rapid prototyping_ and for the initial build and testing APIs.
+I intend to work on the DOCKER install for this project to make it work with LARAVEL and NGINX, and use it for _rapid prototyping_ and for the initial build and testing of APIs.
 
 ## LUMEN
 
@@ -112,10 +112,8 @@ There is a seeder for the **Organizations**, although it is not needed because t
 
 ## TODO
 
-As part of the validation add functionality to verify the needed columns are present (WIP) on the `.csv` file.
-
-Add a cache added to the import for `products` and `variants`.
+Add a cache to the import for `products` and `variants`.
 
 With some work the import functions in the **Models** could be generalized and moved into `App\Models\Base`.
 
-The import could report the *successes* as well as the failures.
+The import could report the *successes* as well as the *failures*.

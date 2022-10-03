@@ -106,9 +106,24 @@ class Product extends Base
      */
     public static function importRows(array $csvRows): array
     {
-        $productHeaders = array_shift($csvRows);
-        $productHeaders = array_combine($productHeaders, array_flip(str_replace(' ', '', $productHeaders)));
+        $productHeaders = str_replace(' ', '', array_shift($csvRows));
 
+        $missingColumns = array_diff(
+            array_keys(
+                array_merge(self::$importColumns, Variant::$importColumns)
+            ),
+            $productHeaders
+        );
+
+        if (!empty($missingColumns)) {
+            return [
+                'error' => [
+                    'missing columns' => $missingColumns,
+                ]
+            ];
+        }
+
+        $productHeaders = array_combine($productHeaders, array_flip($productHeaders));
         $products = [];
 
         foreach ($csvRows as $row) {

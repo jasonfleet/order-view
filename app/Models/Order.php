@@ -121,6 +121,22 @@ class Order extends Base
     public static function importRows(array $csvRows): array
     {
         $orderHeaders = array_shift($csvRows);
+
+        $missingColumns = array_diff(
+            array_keys(
+                self::$importColumns,
+            ),
+            $orderHeaders
+        );
+
+        if (!empty($missingColumns)) {
+            return [
+                'error' => [
+                    'missing columns' => $missingColumns,
+                ]
+            ];
+        }
+
         $orderHeaders = array_combine($orderHeaders, array_flip(str_replace(' ', '', $orderHeaders)));
 
         $orders = [];
