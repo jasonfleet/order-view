@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<style type="text/tailwindcss">
+
+  @layer base {
+
+  body {
+    @apply w-full
+  }
+
+  section {
+    @apply border-2 border-slate-800 box-content mx-3 my-2 p-2 rounded-xl
+  }
+
+  .sdl-2 {
+    display: grid;
+    grid-template-columns: min-content 2fr;
+  }
+
+  .sdl-8 {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(min-content, 1fr));
+    grid-auto-flow: row;
+  }
+
+  .sdl-9 {
+    display: grid;
+    grid-template-columns: repeat(9, minmax(min-content, 1fr));
+  }
+}
+
+@layer layout {
+
+  .data-header {
+    @apply hidden md:inline-block font-bold max-w-min pr-2
+  }
+
+  .data-value {
+    @apply min-w-max md:pr-2
+  }
+
+  .data-title {
+    @apply font-bold max-w-min pr-2
+  }
+
+  .lines {
+    @apply sdl-2 md:sdl-9
+  }
+
+  .lines .data-title {
+    @apply md:hidden
+  }
+
+  .line-data {
+    @apply grid justify-start
+  }
+
+  .line-image {
+    @apply col-span-2 md:col-span-1
+  }
+
+  .line-image div:first-child {
+    @apply md:hidden
+  }
+
+  .line-image div:last-child {
+    @apply hidden md:inline-block
+  }
+
+  .line-image:active div:first-child, .line-image:hover div:first-child {
+    @apply top-0 left-0 md:block md:fixed md:h-0 md:w-full
+  }
+
+  .line-image:active div:first-child img, .line-image:hover div:first-child img {
+    @apply md:mx-auto md:inline-block
+  }
+
+  .organization {
+    @apply grid sdl-2
+  }
+
+  .order {
+    @apply sdl-2 md:sdl-8
+  }
+
+  hr {
+    @apply w-10/12 border-2 border-slate-900
+  }
+}
+
+</style>
+
+<body>
+  <section>
+    <div class="organization">
+      <div class="data-title">URN</div>
+      <div class="data-value" title="school_URN">114519</div>
+      <div class="data-title">Organization</div>
+      <div class="data-value" title="organization_name">PAW C Place</div>
+      <div class="data-title">Telephone</div>
+      <div class="data-value" title="organization_telephone"><a href="tel:01234 567890">01234 567890</a></div>
+      <div class="data-title">Email</div>
+      <div class="data-value" title="organization_email"><a href="mailto:admin@www.pawc.s">admin@www.pawc.s</a></div>
+      <div class="data-title">WWW</div>
+      <div class="data-value" title="organization_url"><a href="http://www.pawc.s" target="_blank">http://www.pawc.s</a></div>
+    </div>
+  </section>
+
+  <section class="order">
+    <div class="data-title">Order&nbsp;ID</div>
+    <div class="data-value" title="order_id">1197</div>
+    <div class="data-title">Date</div>
+    <div class="data-value" title="order_date">27/06/2016 17:01:48</div>
+    <div class="data-title">Name</div>
+    <div class="data-value" title="order_name">PAW C Place</div>
+    <div class="data-title">Contact</div>
+    <div class="data-value" title="order_contact_name">Angela Unlikely</div>
+    <div class="data-title">Address</div>
+    <div class="data-value" title="order_delivery_address_1,2,3">PAW C Place, High Street</div>
+    <div class="data-title">Town</div>
+    <div class="data-value" title="order_delivery_town">Pevensey</div>
+    <div class="data-title">County</div>
+    <div class="data-value" title="order_delivery_county">East Sussex</div>
+    <div class="data-title">Postcode</div>
+    <div class="data-value" title="order_delivery_postcode">AB12 3CD</div>
+    <div class="data-title">Email</div>
+    <div class="data-value" title="order_email_address"><a href="mailto:a.unlikely@pawc.s">a.unlikely@pawc.s</a></div>
+    <div class="data-title">Telephone</div>
+    <div class="data-value" title="order_telephone"><a href="tel:01234 567890">01234 567890</a></div>
+    <div class="data-title">Bulk&nbsp;Total</div>
+    <div class="data-value" title="organization_bulk_order_total">325</div>
+  </section>
+
+  <section class="lines">
+
+    <div class="data-header">Style</div>
+    <div class="data-header">Product</div>
+    <div class="data-header">Colour</div>
+    <div class="data-header">Size</div>
+    <div class="data-header">Barcode</div>
+    <div class="data-header">Price</div>
+    <div class="data-header">Quantity</div>
+    <div class="data-header">Total</div>
+    <div class="data-header">Image</div>
+
+    <div class="data-title">Style</div>
+    <div class="data-value" title="product_colour_style_ref">A0123456</div>
+    <div class="data-title">Product</div>
+    <div class="data-value" title="product_name">Round-Neck Sweat (Unisex)</div>
+    <div class="data-title">Colour</div>
+    <div class="data-value" title="product_colour_name">Red</div>
+    <div class="data-title">Size</div>
+    <div class="data-value" title="product_size_name">8/9</div>
+    <div class="data-title">Barcode</div>
+    <div class="data-value" title="product_ean">5012345678905</div>
+    <div class="data-title">Price</div>
+    <div class="data-value" title="product_price">7.5</div>
+    <div class="data-title">Quantity</div>
+    <div class="data-value" title="product_quantity">10</div>
+    <div class="data-title">Total</div>
+    <div class="data-value" title="product_line_price">75</div>
+    <div class="line-image" title="product_colour_image_url">
+      <div>
+
+        <img
+          alt="Round-Neck Sweat (Unisex)"
+          src="https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Round-Neck+Sweat+(Unisex)"
+          srcset="https://dummyimage.com/180x240/ff0000/f8f8f8.png&text=Round-Neck+Sweat+(Unisex) 180w, https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Round-Neck+Sweat+(Unisex) 210w"
+          sizes="(max-width: 210px) 180px, 210px" />
+      </div>
+      <div>Hover</div>
+    </div>
+
+    <div class="data-title">Style</div>
+    <div class="data-value" title="product_colour_style_ref">A1234567</div>
+    <div class="data-title">Product</div>
+    <div class="data-value" title="product_name">Embroidered Jersey Cardigan</div>
+    <div class="data-title">Colour</div>
+    <div class="data-value" title="product_colour_name">Red</div>
+    <div class="data-title">Size</div>
+    <div class="data-value" title="product_size_name">5/6</div>
+    <div class="data-title">Barcode</div>
+    <div class="data-value" title="product_ean">5012345678904</div>
+    <div class="data-title">Price</div>
+    <div class="data-value" title="product_price">8</div>
+    <div class="data-title">Quantity</div>
+    <div class="data-value" title="product_quantity">10</div>
+    <div class="data-title">Total</div>
+    <div class="data-value" title="product_line_price">80</div>
+    <div class="line-image" title="product_colour_image_url">
+      <div>
+        <img
+          alt="Embroidered Jersey Cardigan"
+          src="https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan"
+          srcset="https://dummyimage.com/180x240/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan 180w, https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan 210w"
+          sizes="(max-width: 210px) 180px, 210px" />
+      </div>
+      <div>Hover</div>
+    </div>
+
+    <div class="data-title">Style</div>
+    <div class="data-value" title="product_colour_style_ref">A1234567</div>
+    <div class="data-title">Product</div>
+    <div class="data-value" title="product_name">Embroidered Jersey Cardigan</div>
+    <div class="data-title">Colour</div>
+    <div class="data-value" title="product_colour_name">Red</div>
+    <div class="data-title">Size</div>
+    <div class="data-value" title="product_size_name">8/9</div>
+    <div class="data-title">Barcode</div>
+    <div class="data-value" title="product_ean">5012345678903</div>
+    <div class="data-title">Price</div>
+    <div class="data-value" title="product_price">8</div>
+    <div class="data-title">Quantity</div>
+    <div class="data-value" title="product_quantity">10</div>
+    <div class="data-title">Total</div>
+    <div class="data-value" title="product_line_price">80</div>
+    <div class="line-image" title="product_colour_image_url">
+      <div>
+        <img
+          alt="Embroidered Jersey Cardigan"
+          src="https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan"
+          srcset="https://dummyimage.com/180x240/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan 180w, https://dummyimage.com/210x280/ff0000/f8f8f8.png&text=Embroidered+Jersey+Cardigan 210w"
+          sizes="(max-width: 210px) 180px, 210px" />
+      </div>
+      <div>Hover</div>
+    </div>
+
+    <div class="data-title">Style</div>
+    <div class="data-value" title="product_colour_style_ref">A2345678</div>
+    <div class="data-title">Product</div>
+    <div class="data-value" title="product_name">Polo Shirt (Unisex)</div>
+    <div class="data-title">Colour</div>
+    <div class="data-value" title="product_colour_name">White</div>
+    <div class="data-title">Size</div>
+    <div class="data-value" title="product_size_name">6/7</div>
+    <div class="data-title">Barcode</div>
+    <div class="data-value" title="product_ean">5012345678902</div>
+    <div class="data-title">Price</div>
+    <div class="data-value" title="product_price">4.5</div>
+    <div class="data-title">Quantity</div>
+    <div class="data-value" title="product_quantity">10</div>
+    <div class="data-title">Total</div>
+    <div class="data-value" title="product_line_price">45</div>
+    <div class="line-image" title="product_colour_image_url">
+      <div>
+        <img
+          alt="Polo Shirt Unisex)"
+          src="https://dummyimage.com/210x280/fefefe/080808.png&text=Polo+Shirt+(Unisex)"
+          srcset="https://dummyimage.com/180x240/fefefe/080808.png&text=Polo+Shirt+(Unisex) 180w, https://dummyimage.com/210x280/fefefe/080808.png&text=Polo+Shirt+(Unisex) 210w"
+          sizes="(max-width: 210px) 180px, 210px" />
+      </div>
+      <div>Hover</div>
+    </div>
+
+    <div class="data-title">Style</div>
+    <div class="data-value" title="product_colour_style_ref">A2345678</div>
+    <div class="data-title">Product</div>
+    <div class="data-value" title="product_name">Polo Shirt (Unisex)</div>
+    <div class="data-title">Colour</div>
+    <div class="data-value" title="product_colour_name">White</div>
+    <div class="data-title">Size</div>
+    <div class="data-value" title="product_size_name">10/11</div>
+    <div class="data-title">Barcode</div>
+    <div class="data-value" title="product_ean">5012345678901</div>
+    <div class="data-title">Price</div>
+    <div class="data-value" title="product_price">4.5</div>
+    <div class="data-title">Quantity</div>
+    <div class="data-value" title="product_quantity">10</div>
+    <div class="data-title">Total</div>
+    <div class="data-value" title="product_line_price">45</div>
+    <div class="line-image" title="product_colour_image_url">
+      <div>
+        <img
+          alt="Polo Shirt Unisex)"
+          src="https://dummyimage.com/210x280/fefefe/080808.png&text=Polo+Shirt+(Unisex)"
+          srcset="https://dummyimage.com/180x240/fefefe/080808.png&text=Polo+Shirt+(Unisex) 180w, https://dummyimage.com/210x280/fefefe/080808.png&text=Polo+Shirt+(Unisex) 210w"
+          sizes="(max-width: 210px) 180px, 210px" />
+      </div>
+      <div>Hover</div>
+    </div>
+
+  </section>
+
+</body>
+
+</html>
