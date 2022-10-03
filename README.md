@@ -84,6 +84,10 @@ It isn't necessary to split the `TestOrders.csv` because the imports ignore the 
 
 The orders table will need to be `TRUNCATED` between tests of the _order import_.
 
+# Database
+
+![Simple ER Diagram](er.svg "Simple ER Diagram")
+
 # Improvements
 
 Needs a cache added to the import for `products` and `variants`.
