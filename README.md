@@ -144,6 +144,7 @@ Ran into some issues with the DOCKER image for PHP-APACHE that I hadn't seen bef
 - composer issues.
 - APACHE did not have `mod-rewrite` added.
 
+Other than having a MySQL up and running quickly I'm not sure using DOCKER was worth the effort for this project - but learnt a lot.
 ## Import
 
 The **import** is only good for the data it has been written for. It would be better to abstract the import function and describe the import as a nested array, something like -
