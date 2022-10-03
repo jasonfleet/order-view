@@ -8,6 +8,12 @@ A mockup of an order is at `/public/mock-order.html` - it's plain HTML with Tail
 
 ## Docker
 
+The application should run in Vagrant and from the php server without any issues.
+
+```
+php -S localhost:8080 -t public
+```
+
 ### Permission issues
 
 There are `write` permission issues with files created from within the DOCKER containers and the host.
