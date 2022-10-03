@@ -2,6 +2,10 @@
 
 ## Introduction
 
+There is no front end to this application (it's a WIP) but there are routes for testing.
+
+A mockup of an order is at `/public/mock-order.html` - it's plain HTML with Tailwind so won't need DOCKER up to see it.
+
 ## Docker
 
 ### Permission issues
@@ -107,8 +111,6 @@ It isn't necessary to split the `TestOrders.csv` because the imports ignore the 
 ![Simple ER Diagram](er.svg "Simple ER Diagram")
 
 The address table was not added. Originally I had thought of storing addresses against the **organizations** as being _valid to send to_.
-
-
 
 ### Seeder
 
