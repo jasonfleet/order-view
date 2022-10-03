@@ -2,6 +2,8 @@
 
 ## Introduction
 
+This is not a finished project!
+
 There is no front end to this application (it's a WIP) but there are routes for testing.
 
 A mockup of an order is at `/public/mock-order.html` - it's plain HTML with Tailwind so won't need DOCKER up to see it- it's responsive and switches between a table layout and a single column layout for smaller screens.
