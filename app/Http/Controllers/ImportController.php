@@ -20,73 +20,121 @@ class ImportController extends Controller
     }
 
     /**
-     * Test for import.
-     * Uses storage/TestOrder.csv
+     * Import all from a single file.
+     *
+     * storage/app/TestOrders.csv must exist for this to work.
      *
      * @return void
      */
-    public function importOrdersTest()
+    public function all()
     {
-        $csv = array_map('str_getcsv', (explode("\n", Storage::get('TestOrders.csv'))));
+        return response(
+            json_encode([
+                'organizations' => $this->importOrganizations('TestOrders.csv'),
+                'products' => $this->importProducts('TestOrders.csv'),
+                'orders' => $this->importOrders('TestOrders.csv'),
+            ],  JSON_PRETTY_PRINT)
+        )
+            ->header('Content-Type', 'application/json');
+    }
+    /**
+     * Import orders.
+     *
+     * @param string $filename
+     * @return void
+     */
+    public function importOrders(string $filename)
+    {
+        $csv = array_map('str_getcsv', (explode("\n", Storage::get($filename))));
 
         $csvResult = Order::importRows($csv);
 
         $result = Order::addRows($csvResult);
 
-        return response(
-            json_encode([
-                'db' => Order::getAll(Order::$dbTableName),
-                'result' => $result,
-                'test-csv' => $csvResult,
-            ],  JSON_PRETTY_PRINT)
-        )
-            ->header('Content-Type', 'application/json');
+        return [
+            'db' => Order::getAll(Order::$dbTableName),
+            'result' => $result,
+            'test-csv' => $csvResult,
+        ];
     }
 
     /**
-     * Test for import.
-     * Uses storage/app/Organizations.csv
+     * Import organizations.
      *
+     * @param string $filename
      * @return void
      */
-    public function importOrganizationsTest()
+    public function importOrganizations(string $filename)
     {
-        $csv = array_map('str_getcsv', (explode("\n", Storage::get('Organizations.csv'))));
+        $csv = array_map('str_getcsv', (explode("\n", Storage::get($filename))));
 
         $csvResult = Organization::importRows($csv);
 
         $result = Organization::addRows($csvResult);
 
-        return response(
-            json_encode([
-                'db' => Organization::getAll(Organization::$dbTableName),
-                'result' => $result,
-                'csv' => $csvResult,
-            ],  JSON_PRETTY_PRINT)
-        )
-            ->header('Content-Type', 'application/json');
+        return [
+            'db' => Organization::getAll(Organization::$dbTableName),
+            'result' => $result,
+            'csv' => $csvResult,
+        ];
     }
 
     /**
-     * Test for import.
-     * Uses storage/app/Products.csv
+     * Import products
      *
+     * @param string $filename
      * @return void
      */
-    public function importProductsTest()
+    public function importProducts(string $filename)
     {
-        $csv = array_map('str_getcsv', (explode("\n", Storage::get('Products.csv'))));
+        $csv = array_map('str_getcsv', (explode("\n", Storage::get($filename))));
 
         $csvResult = Product::importRows($csv);
 
         Product::addRows($csvResult);
 
+        return [
+            'db' => Product::getAll(Product::$dbTableName),
+            'test-csv' => $csvResult,
+        ];
+    }
+
+    /**
+     * Orders
+     *
+     * @return void
+     */
+    public function orders()
+    {
         return response(
-            json_encode([
-                'db' => Product::getAll(Product::$dbTableName),
-                'test-csv' => $csvResult,
-            ],  JSON_PRETTY_PRINT)
+            json_encode($this->importOrders('TestOrders.csv'),  JSON_PRETTY_PRINT)
         )
             ->header('Content-Type', 'application/json');
+    }
+
+    /**
+     * Organizations
+     *
+     * @return void
+     */
+    public function organizations()
+    {
+        return response(
+            json_encode($this->importOrganizations('Organizations.csv'),  JSON_PRETTY_PRINT)
+        )
+            ->header('Content-Type', 'application/json');;
+    }
+
+    /**
+     * Organizations
+     *
+     * @return void
+     */
+    public function products()
+    {
+        return response(
+            json_encode($this->importProducts('Products.csv'),  JSON_PRETTY_PRINT)
+        )
+            ->header('Content-Type', 'application/json');;
     }
 }

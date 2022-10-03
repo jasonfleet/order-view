@@ -13,14 +13,18 @@
 |
 */
 
-$router->get('import-test/organizations', [
-    'uses' => 'ImportController@importOrganizationsTest',
+$router->get('import/all', [
+    'uses' => 'ImportController@all',
 ]);
 
-$router->get('import-test/orders', [
-    'uses' => 'ImportController@importOrdersTest',
+$router->get('import/organizations', [
+    'uses' => 'ImportController@organizations',
 ]);
 
-$router->get('import-test/products', [
-    'uses' => 'ImportController@importProductsTest',
+$router->get('import/orders', [
+    'uses' => 'ImportController@orders',
+]);
+
+$router->get('import/products', [
+    'uses' => 'ImportController@products',
 ]);

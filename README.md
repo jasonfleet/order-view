@@ -2,19 +2,19 @@
 
 ## Introduction
 
-# Docker
+## Docker
 
-## Permission issues
+### Permission issues
 
 There are `write` permission issues with files created from within the DOCKER containers and the host.
 
 If there are errors writing to the log files (`storage\log\*.log`) deleting the log files will resolve them.
 
-## Composer Issues
+### Composer Issues
 
-It is likely that composer will need to be run outside of the container. When i started the project _composer_ would not install the LUMEN app so I installed it from the host (I use LINUX at home, it would be done from WSL on Windows).
+It is likely that composer will need to be run outside of the container. When i started the project _composer_ would not install the LUMEN app so I installed it from the host (WSL on Windows).
 
-## Configuration
+### Configuration
 
 I chose to use LUMEN (see below) so did not get SAIL.
 
@@ -23,24 +23,7 @@ There are 2 containers -
 - PHP Version 8.1 and Apache
 - MySQL
 
-I intend to work on the DOCKER install for this project to make it work with LARAVEL and NGINX, and use it for _rapid prototyping_ and for the initial build and testing APIs (the ).
-
-# React
-
-# Application
-
-## Start docker
-
-```
-docker build
-docker up
-```
-To connect to the containers -
-
-```
-docker exec -it local_db bash
-docker exec -it local_web bash
-```
+I intend to work on the DOCKER install for this project to make it work with LARAVEL and NGINX, and use it for _rapid prototyping_ and for the initial build and testing APIs.
 
 ## LUMEN
 
@@ -48,21 +31,52 @@ LUMEN was chosen mainly for the routing functionality, and over LARAVEL mainly b
 
 On reflection (and after reading a comment on the GitHub page for LUMEN) in future my first choice will be LARAVEL - if I continue with this project it will be converted to LARAVEL.
 
-## Import
+## React
 
-### Order Update
+TODO:
 
+## Application
+
+### Start docker
+
+```
+docker build
+docker up
+```
+
+To connect to the containers -
+
+```
+docker exec -it local_db bash
+docker exec -it local_web bash
+```
+
+### Import
+
+> The .csv files are not included with the repository, you will need to add them.
+>
+> The tables will need to be `TRUNCATED` (or use `artisan` to `wipe` and `migrate`) between runs of the import.
+
+The URL below will import the **products and variants**, and **organizations** and **orders** from a single file - `storage\app\TestOrders.csv`.
+
+```
+http://localhost:8080/api/import/all
+```
+
+The results are return as JSON.
+
+#### Order Update
 Once created there is no update to the orders.
 
-### Product and Variant Update
+#### Product and Variant Update
 
 A product is updated if the `ean` or `name` column are different (the columns were chosen as an example).
 
 A variant is updated if the `price` column is different.
 
-## Addresses
+### Addresses
 
-The addresses are not imported with the organizations.
+The addresses are not imported with the organizations, they are stored with the order.
 
 ### Development Testing
 
@@ -71,27 +85,37 @@ For testing the **products and variants**, and **organizations** were extracted 
 The URLs below are used during development -
 
 ```
-http://localhost:8080/api/import-test/organizations
-http://localhost:8080/api/import-test/orders
-http://localhost:8080/api/import-test/products
+http://localhost:8080/api/import/organizations
+http://localhost:8080/api/import/orders
+http://localhost:8080/api/import/products
 ```
 
-The data in them does repeat (all the the rows from `TestOrders.csv` were used) and there are columns that aren't needed for the **organizations** - that formed part of the testing.
+The results are return as JSON.
+
+The data in them repeats (all the the rows from `TestOrders.csv` were used) and there are columns that aren't needed for the **organizations** - that formed part of the testing.
 
 For those URLs to work there must be a `storage\app\Organizations.csv` file, a `storage\app\Products.csv` file and a `storage\app\TestOrders.csv` file.
 
 It isn't necessary to split the `TestOrders.csv` because the imports ignore the extra columns.
 
-The orders table will need to be `TRUNCATED` between tests of the _order import_.
+## Database
 
-# Database
+### Simple ER Diagram
 
 ![Simple ER Diagram](er.svg "Simple ER Diagram")
 
-# Improvements
+The address table was not added. Originally I had thought of storing addresses against the **organizations** as being _valid to send to_.
 
-Needs a cache added to the import for `products` and `variants`.
+### Seeder
+
+There is a seeder for the **Organizations**, although it is not needed because they can be imported from a .csv file.
+
+## TODO
+
+As part of the validation add functionality to verify the needed columns are present (WIP) on the `.csv` file.
+
+Add a cache added to the import for `products` and `variants`.
 
 With some work the import functions in the **Models** could be generalized and moved into `App\Models\Base`.
 
-The import could report the *successes* and well as the failures.
+The import could report the *successes* as well as the failures.
