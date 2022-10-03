@@ -31,6 +31,8 @@ I intend to work on the DOCKER install for this project to make it work with LAR
 
 ## LUMEN
 
+You will need to copy the `.env.example` file to `.env` for the database connection.
+
 LUMEN was chosen mainly for the routing functionality, and over LARAVEL mainly because I chose not to use ELOQUENT and I wanted to avoid all the _extras_ that come with LARAVEL.
 
 On reflection (and after reading a comment on the GitHub page for LUMEN) in future my first choice will be LARAVEL - if I continue with this project it will be converted to LARAVEL.
