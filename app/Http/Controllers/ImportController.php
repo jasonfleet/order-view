@@ -54,7 +54,7 @@ class ImportController extends Controller
         return [
             'db' => Order::getAll(Order::$dbTableName),
             'result' => $result,
-            'test-csv' => $csvResult,
+            'csv' => $csvResult,
         ];
     }
 
@@ -95,7 +95,7 @@ class ImportController extends Controller
 
         return [
             'db' => Product::getAll(Product::$dbTableName),
-            'test-csv' => $csvResult,
+            'csv' => $csvResult,
         ];
     }
 
