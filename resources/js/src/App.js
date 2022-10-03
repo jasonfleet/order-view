@@ -1,27 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import Orders from "./components/Orders";
+import Organizations from "./components/Organizations";
+import Products from "./components/Products";
+import Upload from "./components/Upload";
 
 function App() {
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.js</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React Now
-                </a>
 
-                <h1 className="text-3xl font-bold">
-                    Hello world!
-                </h1>
-            </header>
+    const [tab, setTab] = useState('upload')
+
+
+    return (
+        <div className="app">
+            <div><h1 className="text-3xl mb-6">Order View</h1></div>
+
+            <div className='buttons'>
+                <button className={tab === 'upload' ? 'bg-slate-600' : ''} onClick={() => setTab('upload')} type='button'>Uploads</button>
+                <button className={tab === 'organizations' ? 'bg-slate-600' : ''} onClick={() => setTab('organizations')} type='button'>Organizations</button>
+                <button className={tab === 'products' ? 'bg-slate-600' : ''} onClick={() => setTab('products')} type='button'>Products</button>
+                <button className={tab === 'orders' ? 'bg-slate-600' : ''} onClick={() => setTab('orders')} type='button'>Orders</button>
+            </div>
+
+            {tab === 'upload' && <Upload />}
+
+            {tab === 'organizations' && <Organizations />}
+
+            {tab === 'products' && <Products />}
+
+            {tab === 'orders' && <Orders />}
+
         </div>
     );
 }
