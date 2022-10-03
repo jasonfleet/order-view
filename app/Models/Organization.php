@@ -74,6 +74,17 @@ class Organization extends Base
     }
 
     /**
+     * Returns a list iof orders and variants.
+     *
+     * @return void
+     */
+    public static function getOrganizations()
+    {
+        return DB::table(self::$dbTableName)
+            ->get();
+    }
+
+    /**
      * Import the orders in the array..
      *
      * @return array

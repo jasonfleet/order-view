@@ -98,6 +98,19 @@ class Product extends Base
     }
 
     /**
+     * Undocumented function
+     *
+     * @return void
+     */
+    public static function getProducts()
+    {
+
+        return DB::table(self::$dbTableName)
+            ->leftJoin('variants', 'products.id', '=', 'variants.product_id')
+            ->get();
+    }
+
+    /**
      * Import the products in the array.
      *
      * @param array $csvRows

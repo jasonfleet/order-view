@@ -8,7 +8,6 @@ function App() {
 
     const [tab, setTab] = useState('upload')
 
-
     return (
         <div className="app">
             <div><h1 className="text-3xl mb-6">Order View</h1></div>

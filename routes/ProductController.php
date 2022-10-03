@@ -14,30 +14,30 @@
 */
 
 $router->get('import/all', [
-    'uses' => 'ImportController@all',
+  'uses' => 'ImportController@all',
 ]);
 
 $router->get('import/organizations', [
-    'uses' => 'ImportController@organizations',
+  'uses' => 'ImportController@organizations',
 ]);
 
 $router->get('import/orders', [
-    'uses' => 'ImportController@orders',
+  'uses' => 'ImportController@orders',
 ]);
 
 $router->get('import/products', [
-    'uses' => 'ImportController@products',
+  'uses' => 'ImportController@products',
 ]);
 
 
 $router->get('orders', [
-    'uses' => 'OrderController@get',
+  'uses' => 'OrderController@get',
 ]);
 
 $router->get('organizations', [
-    'uses' => 'OrganizationController@get',
+  'uses' => 'OrganizationController@get',
 ]);
 
 $router->get('products', [
-    'uses' => 'ProductController@get',
+  'uses' => 'ProductController@get',
 ]);

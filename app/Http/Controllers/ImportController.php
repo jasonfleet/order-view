@@ -10,16 +10,6 @@ use Illuminate\Support\Facades\Storage;
 class ImportController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
-
-    /**
      * Import all from a single file.
      *
      * storage/app/TestOrders.csv must exist for this to work.

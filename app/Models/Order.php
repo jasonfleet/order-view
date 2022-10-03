@@ -114,6 +114,18 @@ class Order extends Base
     }
 
     /**
+     * Returns a list of orders.
+     *
+     * @return void
+     */
+    public static function getOrders()
+    {
+        return DB::table(self::$dbTableName)
+            ->leftJoin('organizations', 'orders.organization_id', '=', 'organizations.id')
+            ->get();
+    }
+
+    /**
      * Import the orders in the array..
      *
      * @return array

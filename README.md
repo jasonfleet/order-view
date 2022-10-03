@@ -54,8 +54,8 @@ TODO:
 ### Start docker
 
 ```
-docker build
-docker up
+docker-compose build
+docker-compose up
 ```
 
 To connect to the containers -
