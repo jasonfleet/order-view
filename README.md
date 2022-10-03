@@ -12,7 +12,7 @@ If there are errors writing to the log files (`storage\log\*.log`) deleting the 
 
 ### Composer Issues
 
-It is likely that composer will need to be run outside of the container. When i started the project _composer_ would not install the LUMEN app so I installed it from the host (WSL on Windows).
+It is likely that composer will need to be run outside of the container. When I started the project _composer_ would not install the LUMEN app so I installed it from the host (WSL on Windows).
 
 ### Configuration
 
@@ -55,7 +55,7 @@ docker exec -it local_web bash
 
 > The .csv files are not included with the repository, you will need to add them.
 >
-> The tables will need to be `TRUNCATED` (or use `artisan` to `wipe` and `migrate`) between runs of the import.
+> The tables will need to be `TRUNCATED` (or use `artisan` to `wipe` and `migrate`) between runs of the import(s).
 
 The URL below will import the **products and variants**, and **organizations** and **orders** from a single file - `storage\app\TestOrders.csv`.
 
@@ -63,7 +63,7 @@ The URL below will import the **products and variants**, and **organizations** a
 http://localhost:8080/api/import/all
 ```
 
-The results are return as JSON.
+The results are returned as JSON.
 
 #### Order Update
 Once created there is no update to the orders.
@@ -82,19 +82,21 @@ The addresses are not imported with the organizations, they are stored with the 
 
 For testing the **products and variants**, and **organizations** were extracted from the `TestOrders.csv` file into an `Organizations.csv` file and a `Products.csv` file.
 
-The URLs below are used during development -
+The URLs below were used during development -
 
 ```
 http://localhost:8080/api/import/organizations
-http://localhost:8080/api/import/orders
 http://localhost:8080/api/import/products
+http://localhost:8080/api/import/orders
 ```
+
+For those URLs to work there must be a `storage\app\Organizations.csv` file, a `storage\app\Products.csv` file and a `storage\app\TestOrders.csv` file.
+
+They must be done in the order taht they are listed.
 
 The results are return as JSON.
 
-The data in them repeats (all the the rows from `TestOrders.csv` were used) and there are columns that aren't needed for the **organizations** - that formed part of the testing.
-
-For those URLs to work there must be a `storage\app\Organizations.csv` file, a `storage\app\Products.csv` file and a `storage\app\TestOrders.csv` file.
+The data in them repeats (all the the rows from `TestOrders.csv` were used) and  columns that aren't needed for the **organizations** were left in the `.csv` file - that formed part of the testing.
 
 It isn't necessary to split the `TestOrders.csv` because the imports ignore the extra columns.
 
@@ -106,9 +108,11 @@ It isn't necessary to split the `TestOrders.csv` because the imports ignore the 
 
 The address table was not added. Originally I had thought of storing addresses against the **organizations** as being _valid to send to_.
 
+
+
 ### Seeder
 
-There is a seeder for the **Organizations**, although it is not needed because they can be imported from a .csv file.
+There is a seeder for the **Organizations**, although it is not needed because they can be imported from a `.csv` file.
 
 ## TODO
 
@@ -117,3 +121,63 @@ Add a cache to the import for `products` and `variants`.
 With some work the import functions in the **Models** could be generalized and moved into `App\Models\Base`.
 
 The import could report the *successes* as well as the *failures*.
+
+# Conclusion
+
+Writing this has been an experience.
+
+## DOCKER
+
+Ran into some issues with the DOCKER image for PHP-APACHE that I hadn't seen before -
+
+- permissions.
+- composer issues.
+- APACHE did not have `mod-rewrite` added.
+
+## Import
+
+The **import** is only good for the data it has been written for. It would be better to abstract the import function and describe the import as a nested array, something like -
+
+```
+'products' => [
+    'columns' => [
+        'product_colour_image_url' => [
+            'db-column' => 'colour_image_url',
+        ],
+        'product_colour_name' => [
+            'db-column' => 'colour_name',
+        ],
+        'product_colour_style_ref' => [
+            'db-column' => 'colour_style_ref',
+            'required => TRUE,
+        ],
+        'product_ean' => [
+            'db-column' => 'ean',
+            'can-update' => TRUE, // FALSE if not defined
+        ],
+        'product_name' => [
+            'db-column' => 'name',
+            'can-update' => TRUE,
+        ],
+        'product_never_there_column' => [
+            'db-column' => 'never_there',
+            'can-update' => TRUE,
+            'required' => FALSE, // TRUE if not defined
+        ]
+    ],
+    'table-name' => 'products',
+    'sub-imports' = [
+        'variants' => [
+            'columns' => [
+                'product_price' => [
+                    'db-column'=> 'price',
+                ],
+                'product_size_name' => [
+                    'db-column' => 'size_name',
+                ],
+            ],
+            'table-name' => 'products',
+        ]
+    ]
+]
+```
